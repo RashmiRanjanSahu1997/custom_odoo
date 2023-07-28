@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="get_report_form" model="ir.ui.view">
+        <field name="name">get.report.form</field>
+        <field name="model">product.reports</field>
+        <field name="arch" type="xml">
+            
+            <form>
+                <group>
+                    <field name="name">
+                    <tree>
+                    <field name="product_id"/>
+                    <field name="product_qty"/>
+                    <!-- <field name="standard_price"/> -->
+                    </tree>
+                    </field>
+                </group>
+             </form>
+            <!-- <button type="object" name="default_get"  string="ADD" class="btn btn-success"/> -->
+        </field>
+    </record> 
+    <record model="ir.actions.act_window" id="get_report_action">
+        <field name="name">Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.reports</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
+
+
+
+
+
+<!-- </group> -->
+                    <!-- <group>
+                        <field name="bom"/>
+                    </group>
+                    <group>
+                        <field name="quantities"/>
+                    </group>
+                    <group>
+                        <field name="price"/>
+                    </group> -->
+                    <!-- <tree>
+                <field name="name"/>
+            </tree> -->

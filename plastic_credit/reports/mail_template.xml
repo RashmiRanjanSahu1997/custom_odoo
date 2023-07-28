@@ -1,0 +1,70 @@
+<odoo>
+
+
+<data noupdate="1">
+    <record id="approve_plastic_request_mail_template" model="mail.template">
+        <field name="name">Plastic Request : Send by email</field>
+        <field name="model_id" ref="plastic_credit.model_request_details"/>
+        <field name="subject">New record found Code is ${object.code}</field>
+        <field name="email_from">${object.create_uid.login}</field>
+        <!-- <field name="email_to">${object.name.login}</field> -->
+        <field name="body_html" type="html">
+            <t t-esc="object"/>
+            <h3>Hello ${ctx.get('name')}</h3>
+            <br></br>
+            <div style="text-align: center; margin: 16px 0px 16px 0px; font-size: 14px;">
+            <a href="${object.get_base_url()}/web#id=${ctx.get('ids')}&amp;action=${ctx['params']['action']}&amp;model=request.details&amp;view_type=form&amp;cids=&amp;menu_id=${ctx['params']['menu_id']}" style="padding: 8px 12px; font-size: 12px; color: #FFFFFF; text-decoration: none !important; font-weight: 400; background-color: #875A7B; border: 0px solid #875A7B; border-radius:3px">View Details</a>
+            </div>
+            <p>this is to inform you that New record found for Approve</p>
+            <p>Request details Added Below </p>
+            <br></br>
+<p>Do not hesitate to contact us if you have any questions.</p>
+            <p>Thank You!!!</p>
+        </field>
+        <field name="auto_delete" eval="False"/>
+    </record>
+</data>
+
+<data noupdate="1">
+    <record id="cancel_plastic_request_mail_template" model="mail.template">
+        <field name="name">Cancel Request : Send by email</field>
+        <field name="model_id" ref="plastic_credit.model_request_details"/>
+        <field name="subject">Hello Dear</field>
+        <field name="email_from">${object.create_uid.login}</field>
+        <field name="email_to">${object.name.login}</field>
+        <field name="body_html" type="html">
+            <t t-esc="object"/>
+            <p class="font-danger">
+                Hello ${object.name.name}Customer
+                 <br/><br/>
+            </p>
+          
+            <p>this is to inform you that your Product requsest  id  is ${object.code} request cancelled</p>
+            <p>Thank You!!!</p>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</data>
+
+<data noupdate="1">
+    <record id="done_plastic_request_mail_template" model="mail.template">
+        <field name="name">Done Request : Send by email</field>
+        <field name="model_id" ref="plastic_credit.model_request_details"/>
+        <field name="subject">Hello Dear</field>
+        <field name="email_from">${object.create_uid.login}</field>
+        <field name="email_to">${object.name.login}</field>
+        <field name="body_html" type="html">
+            <t t-esc="object"/>
+            <p class="font-danger">
+                Hello ${object.name.name}Customer
+                 <br/><br/>
+            </p>
+          
+            <p>this is to inform you that your Product requsest  id  is ${object.code} request Approved</p>
+            <p>Thank You!!!</p>
+        </field>
+        <field name="auto_delete" eval="True"/>
+    </record>
+</data>
+
+</odoo>

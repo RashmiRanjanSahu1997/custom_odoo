@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="data_connection_form_view" model="ir.ui.view">
+        <field name="name">data.connection.form.view</field>
+        <field name="model">data.connection</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type='object' name='set_unmatched_data' string='Create Unmatch Data' attrs="{'invisible': [('unmatch_id', '=',[])]}"/>
+                    <button name='compare_tables' string='Compare Table' type='object'/>
+                </header>
+                <sheet>
+                    <group>
+                    <group>
+                        <field name='name' required='1'/>
+                        <field name='database_name' required='1'/>
+                        <field name='user' required='1'/>
+                        <field name='password' required='1' password="True"/>
+                        <field name='is_active' widget='boolean_toggle'/>
+                        <field name='is_connect' readonly='1'/>
+                    </group>
+                    <group>
+                        <field name='table'/>
+                    </group>
+                </group>
+                    <button type='object' name='is_connected' string='Check Connection' icon="fa-television"/>
+                    <notebook>
+                        <page string="Matched Data">
+                            <group>
+                                <field name="match_id"/>
+                            </group>
+                        </page>
+                        <page string="Unmatched Data">
+                            <group>
+                                <field name='unmatch_id'>
+                                <tree editable="1">
+                                    <field name='convert_type'/>
+                                    <field name='name'/>
+                                    <field name='db_id'/>
+                                    <field name='odoo_name'/>
+                                    <field name='odoo_id'/>
+                                </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="data_connection_tree_viewss" model="ir.ui.view">
+        <field name="name">data.connection.tree.view</field>
+        <field name="model">data.connection</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name'/>
+                <field name='database_name'/>
+                <field name='user'/>
+                <field name='password'/>
+                <field name='is_active'/>
+                <field name='is_connect'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="data_connection_action" model="ir.actions.act_window">
+        <field name="name">Connection Setting</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">data.connection</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="data_connection_menu"
+    name="Data Connetion"
+    parent='user_configuration_menu'
+    action="data_connection_action"/>
+</odoo>

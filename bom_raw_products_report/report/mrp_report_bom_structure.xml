@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="report_mrp_bom_max_product" inherit_id="mrp.report_mrp_bom">
+        <xpath expr="//div[hasclass('o_mrp_bom_report_page')]//div[hasclass('row')]//h3" position="inside">
+            <span t-if="data.get('is_from_product')" class="max_qty ml-5">
+                Max Qty: <t t-esc="data['bom_qty']"/>
+            </span>
+        </xpath>
+    </template>
+</odoo>

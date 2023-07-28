@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="invitation_status_form_view" model="ir.ui.view">
+        <field name="name">invitation.status.form.view</field>
+        <field name="model">invitation.status</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                <sheet>
+                    <group>
+                        <field name='name' required='1'/>
+                        <field name='order'/>
+                        <field name='db_id' readonly='1'/>
+                        <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                        <field name='is_closed'/> 
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="invitation_status_tree_view" model="ir.ui.view">
+        <field name="name">invitation.status.tree.view</field>
+        <field name="model">invitation.status</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='order' widget='handle'/>
+                <field name="name"/>
+                <field name='db_id'/> 
+            </tree>
+        </field>
+    </record>
+
+    <record id="user_invitation_status_action" model="ir.actions.act_window">
+        <field name="name">User Invitation Status</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invitation.status</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="user_invitation_status_menu"
+	name="User Invitation Status"
+    parent='user_invitation_main_menu'
+  	action="user_invitation_status_action"/>
+
+      <record model="ir.actions.server" id="invitation_status_server_action">
+        <field name="name">Sync Now</field>
+        <field name="model_id" ref="plastic_credit.model_invitation_status"/>
+        <field name="binding_model_id" ref="plastic_credit.model_invitation_status" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.sync_now()
+        </field>
+    </record>
+
+    <record id="invitation_status_view_search" model="ir.ui.view">
+        <field name="name">invitation.status.view.search</field>
+        <field name="model">invitation.status</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter string='Sync Now' name='db_id' domain="[('db_id','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

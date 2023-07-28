@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="request_history_pdf_report" model="ir.actions.report">
+            <field name="name">Report Pdf</field>
+            <field name="model">request.details.history</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">plastic_credit.request_history_template</field>
+            <field name="report_file">plastic_credit.request_history_template</field>
+            <field name="binding_model_id" ref="model_request_details_history"/>
+            <field name="binding_type">report</field>
+            <field name="attachment_use">True</field>
+            <field name="binding_view_types">form</field>
+        </record>
+
+        <template id="request_history_template">
+            <t t-call="web.html_container"> 
+                <div class="page">
+                <t t-call="plastic_credit.default_external_layout_background">
+                <t t-foreach="docs" t-as="o">
+                    <center>
+                        <h2 t-field="o.requester.name" class="text-right fw-bold"/>
+                        <h6 t-field="o.street" class="text-right fw-bold"/>
+                        <h6 t-field="o.city" class="text-right fw-bold"/>  <h6 class="text-right fw-bold" t-field="o.state_id.name"/>
+                        <h6 t-field = "o.zip" class="text-right fw-bold"/>
+                        <h6 t-field="o.country.name" class="text-right fw-bold"/>
+                    </center>
+                    <h4>
+                        Reason:<span t-field='o.name'/>
+                    </h4>
+                    <table width="100%">                      
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>UOM</th>
+                                <th>Quantity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.request_line" t-as="d">
+                                <tr class="border-black" style="border-bottom:1px solid #dddddd;">
+                                    <td><span t-field="d.name"/></td>
+                                    <td><span t-field="d.uom"/></td>
+                                    <td><span t-field="d.quantity"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                    <p class="text-right fw-bold">Total product :<span t-field='o.total'/></p>
+                </t>
+                </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

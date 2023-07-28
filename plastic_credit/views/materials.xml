@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="plastic_materials_form_view" model="ir.ui.view">
+        <field name="name">plastic.materials.form.view</field>
+        <field name="model">plastic.materials</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                <sheet>
+                    <group>
+                        <field name='name' required='1'/>
+                        <field name='db_id' readonly='1'/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="plastic_materials_tree_view" model="ir.ui.view">
+        <field name="name">plastic.materials.tree.view</field>
+        <field name="model">plastic.materials</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name='db_id' readonly='1'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="plastic_materials_action" model="ir.actions.act_window">
+        <field name="name">Plastic Materials</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">plastic.materials</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem id="menu_Plastic_materials" name="Plastic Materials"  parent='plastic_credit.user_configuration_menu' action="plastic_materials_action"/>
+
+    <record model="ir.actions.server" id="plastic_materials_server_action">
+        <field name="name">Sync Now</field>
+        <field name="model_id" ref="plastic_credit.model_plastic_materials"/>
+        <field name="binding_model_id" ref="plastic_credit.model_plastic_materials" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.sync_now()
+        </field>
+    </record>
+
+    <record id="plastic_materials_view_search" model="ir.ui.view">
+        <field name="name">plastic.materials.view.search</field>
+        <field name="model">plastic.materials</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter string='Sync Now' name='db_id' domain="[('db_id','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pc_request_details_history_form_views" model="ir.ui.view">
+        <field name="name">pc.request.details.history.form.view</field>
+        <field name="model">request.details.history</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                <header>
+                    <field name="status" widget="statusbar"  options="{'clickable': '1','fold_field': 'is_closed'}"/>
+                </header>
+                <sheet>
+                    <h5>
+                        <field name='code'/>
+                        
+                    </h5>
+                    <h1><field name='name' required='1' placeholder='eg. Request Details'/></h1>
+                    <group>
+                        <group>
+                            <field name='requester'/>
+                            <label for="street" invisible='1'/>
+                            <div class="o_address_format">
+                                <field name="street" readonly='1' force_save='1' placeholder="Street..." class="o_address_street"/>
+                                <field name="city" placeholder="City" readonly='1' force_save='1' class="o_address_city"/>
+                                <field name="state_id" class="o_address_state" readonly='1' force_save='1' placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                                <field name="zip" placeholder="ZIP" readonly='1' force_save='1' class="o_address_zip"/>
+                                <field name="country" placeholder="Country" readonly='1' force_save='1' class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                            </div> 
+                            <field name='quantity_type'/>
+                            <field name='category_id'/>
+                            <field name='pc_received' widget='boolean_toggle'/>
+                            <field name='is_deleted' widget='boolean_toggle'/>
+                        </group>
+                        <group>
+                            <field name='region'/>
+                            <field name='pc_type'/>
+                            <field name='remark'/>
+                            <field name='pcr_id'/>
+                            <field name='reason'/>
+                            <field name='db_id' readonly='1'/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Order Details">
+                            <field name="request_line">
+                                <tree  editable="bottom">
+                                <field name ='name'/>
+                                <field name='desc'/>
+                                <field name='uom'/> 
+                                <field name='quantity'/>        
+                            </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <!-- <footer> -->
+                        <!-- <field name='total'/> -->
+                    <!-- </footer> -->
+<!-- 
+                    <group name="note_group" col="6" class="mt-2 mt-md-0">
+                        <group class="oe_subtotal_footer oe_right" colspan="2" name="sale_total">
+                            <field name="amount_untaxed" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <field name="amount_tax" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                            <div class="oe_subtotal_footer_separator oe_inline o_td_label">
+                                <label for="amount_total"/>
+                            </div>
+                            <field name="amount_total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <div class="oe_clear"/>
+                    </group> -->
+                    <div class="oe_subtotal_footer_separator oe_inline o_td_label oe_right">
+                        <label for="total"/>
+                   
+                    <field name="total" readonly = '1' force_save='1' class="oe_subtotal_footer_separator oe_right"/>
+                </div>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="pc_request_details_history_tree_view" model="ir.ui.view">
+        <field name="name">pc.request.details.history.tree.view</field>
+        <field name="model">request.details.history</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='code'/>
+                <field name="name"/>
+                <field name='requester'/>
+                <field name='quantity_type'/>
+                <field name='category_id'/>
+                <field name='pc_received'/>
+                <field name='region'/>
+                <field name='pc_type'/>
+                <field name='status' decoration-warning="status ==10" decoration-success="status == 9"
+                                decoration-primary="status==8" widget="badge"/>
+                <field name='remark'/>
+                <field name='pcr_id'/>
+                <field name='db_id' readonly='1'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="request_details_history_action" model="ir.actions.act_window">
+        <field name="name">Pc Request Details History</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">request.details.history</field>
+        <field name="view_mode">tree,form,graph,calendar,pivot</field>
+    </record>
+
+    
+
+    <record id="request_details_history" model="ir.actions.act_window.view">
+        <field name="sequence" eval="0"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="pc_request_details_history_tree_view"/>
+        <field name="act_window_id" ref="request_details_history_action"/>
+    </record>
+
+    <menuitem id="menu_plastic_materials" name="Plastic Credit" groups="base.group_user"/>
+    <menuitem id="request_details_history_menu_main" name="Request Details" parent ='menu_plastic_materials' action="request_details_history_action"/>
+    <menuitem id="main_request_details_history_menu_main" sequence='0' name="Request Details History" parent ='request_details_history_menu_main' action="request_details_history_action"/>
+
+
+    <record id="pc_request_details_history_search" model="ir.ui.view">
+        <field name="name">request.details.history.search</field>
+        <field name="model">request.details.history</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="quantity_type"/>
+                <field name="region"/>
+                <filter string='By Done' name='status' domain="[('status','=','Done')]"/>
+                <filter string='By Cancelled' name='status' domain="[('status','=','Cancelled')]"/>
+                <filter string='Sync Now' name='db_id' domain="[('db_id','=',False)]"/>
+                <group>
+                    <filter string="Status" name="group_by_status" domain="[]" context="{'group_by':'status'}"/>
+                    <filter string="Region" name="group_by_region" domain="[]" context="{'group_by':'region'}"/>
+                    <filter string="Pc Type" name="group_by_pc_type" domain="[]" context="{'group_by':'pc_type'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="request_details_history_graph" model="ir.ui.view">
+        <field name="name">request.details.history.graph</field>
+        <field name="model">request.details.history</field>
+        <field name="arch" type="xml">
+            <graph string="Request History">
+                <field name="name"/>
+                <!-- <field name="quantity"/> -->
+            </graph>
+        </field>
+     </record>
+
+     <record id="request_details_history_calendar_view" model="ir.ui.view">
+        <field name="name">request.details.history.calendar</field>
+        <field name="model">request.details.history</field>
+        <field eval="2" name="priority"/>
+        <field name="arch" type="xml">
+            <calendar date_start="create_date" string="Tasks" mode="month" event_limit="5"
+                      hide_time="true" js_class="project_calendar" event_open_popup="true" quick_add="false">
+                <field name="name" filters="1"/>
+                <field name="status" widget="many2many_avatar_user"/>
+            </calendar>
+        </field>
+     </record>
+
+    <record id="request_details_history_pivot_active" model="ir.ui.view">
+        <field name="name">request.details.pivot.view</field>
+        <field name="model">request.details.history</field>
+        <field name="arch" type="xml">
+            <pivot string="Request Details History" sample="1">
+                <field name="name" type="row"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.actions.server" id="request_details_history_server_action">
+        <field name="name">Sync Now</field>
+        <field name="model_id" ref="plastic_credit.model_request_details_history"/>
+        <field name="binding_model_id" ref="plastic_credit.model_request_details_history" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.sync_now()
+        </field>
+    </record>
+
+</odoo>

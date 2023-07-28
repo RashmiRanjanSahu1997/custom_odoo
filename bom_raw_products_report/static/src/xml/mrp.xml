@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-inherit="mrp.report_bom_search" t-inherit-mode="extension">
+        <xpath expr="//div[1]" position="attributes">
+            <attribute name="t-if">!is_from_product</attribute>
+        </xpath>
+    </t>
+</templates>

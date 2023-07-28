@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="user_wallet_form_view" model="ir.ui.view">
+        <field name="name">user.wallet.form.view</field>
+        <field name="model">user.wallet</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                <sheet>
+                    <group>
+                        <field name='name'/>
+                        <field name='private_key'/>
+                        <field name='wallet_password'/>
+                        <field name='wallet_balance'/>
+                        <field name='uncleared_balance'/>
+                        <field name='db_id' readonly='1'/>
+                        <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="user_wallet_tree_view" model="ir.ui.view">
+        <field name="name">user.wallet.tree.view</field>
+        <field name="model">user.wallet</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name'/>
+                <field name='private_key'/>
+                <field name='wallet_password'/>
+                <field name='wallet_balance'/>
+                <field name='uncleared_balance'/>
+                <field name='db_id' readonly='1'/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="user_wallet_action" model="ir.actions.act_window">
+        <field name="name">User Wallet</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">user.wallet</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="user_wallet_menu"
+    name="User Wallet"
+    parent='user_invitation_main_menu'
+    action="user_wallet_action"/>
+
+    <record model="ir.actions.server" id="user_wallet_server_action">
+        <field name="name">Sync Now</field>
+        <field name="model_id" ref="plastic_credit.model_user_wallet"/>
+        <field name="binding_model_id" ref="plastic_credit.model_user_wallet" />
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.sync_now()
+        </field>
+    </record>
+
+    <record id="pc_user_wallet_search" model="ir.ui.view">
+        <field name="name">user.wallet.search</field>
+        <field name="model">user.wallet</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="private_key"/>
+                <field name="wallet_balance"/>
+                <filter string='Sync Now' name='db_id' domain="[('db_id','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+</odoo>

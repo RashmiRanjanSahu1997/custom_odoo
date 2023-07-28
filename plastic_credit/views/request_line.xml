@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="request_line_form_view" model="ir.ui.view">
+        <field name="name">request.line.form.view</field>
+        <field name="model">request.details.line</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name='name'/>
+                        <field name='desc'/>
+                        <field name='quantity'/>
+                        <!-- <field name ='unit_price'/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="request_line_tree_views" model="ir.ui.view">
+        <field name="name">request.line.tree.view</field>
+        <field name="model">request.details.line</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name'/>
+                <field name='quantity'/>
+                <field name='desc'/>
+                <!-- <field name='odoo_id'/> -->
+            </tree>
+        </field>
+    </record>
+
+    <record id="request_details_action" model="ir.actions.act_window">
+        <field name="name">Request Line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">request.details.line</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+<!-- 
+    <menuitem id="data_match_menu"
+    name="Match Data"
+    parent='user_configuration_menu'
+    action="data_match_action"/> -->
+
+</odoo>

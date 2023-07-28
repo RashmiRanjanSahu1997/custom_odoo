@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="pc_type_form_view" model="ir.ui.view">
+        <field name="name">pc.type.form.view</field>
+        <field name="model">pc.type</field>
+        <field name="arch" type="xml">
+            <form>
+                <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                <sheet>
+                    <group>
+                        <field name='name' required='1'/>
+                        <field name='is_active' widget='boolean_toggle'/>
+                        <field name='db_id' readonly='1'/>
+                        <!-- <button name='sync_now' type='object' string='Sync Now' attrs="{'invisible': [('db_id', '>', 0)]}"/> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="pc_type_tree_view" model="ir.ui.view">
+        <field name="name">pc.type.tree.view</field>
+        <field name="model">pc.type</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name='db_id' readonly='1'/>           
+            </tree>
+        </field>
+    </record>
+
+    <record id="pc_type_action" model="ir.actions.act_window">
+        <field name="name">PC Type</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pc.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="pc_type_menu"
+	name="Pc Type"
+    parent='request_details_history_menu_main'
+  	action="pc_type_action"
+	/>
+    
+
+    <record model="ir.actions.server" id="pc_type_server_action">
+        <field name="name">Sync Now</field>
+        <field name="model_id" ref="plastic_credit.model_pc_type"/>
+        <field name="binding_model_id" ref="plastic_credit.model_pc_type"/>
+        <field name="state">code</field>
+        <field name="code">
+            if records:
+                action = records.sync_now()
+        </field>
+    </record>
+
+    <record id="pc_type_view_search" model="ir.ui.view">
+        <field name="name">pc.type.view.search</field>
+        <field name="model">pc.type</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <filter string='Sync Now' name='db_id' domain="[('db_id','=',False)]"/>
+            </search>
+        </field>
+    </record>
+</odoo>
