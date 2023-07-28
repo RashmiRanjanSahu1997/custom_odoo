@@ -1,0 +1,13 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+loan_management.access_loan_management,access_loan_management,loan_management.model_loan_management,base.group_user,1,1,1,1
+loan_management.access_loans_lines,access_loans_lines,loan_management.model_loans_lines,base.group_user,1,1,1,1
+loan_management.access_payment_interest,access_payment_interest,loan_management.model_payment_interest,base.group_user,1,1,1,1
+loan_management.access_loan_product,access_loan_product,loan_management.model_loan_product,base.group_user,1,1,1,1
+loan_management.access_loan_principal,access_loan_principal,loan_management.model_loan_principal,base.group_user,1,1,1,1
+
+loan_management.access_account_loan,access_account_loan,loan_management.model_account_loan,base.group_user,1,1,1,1
+loan_management.access_account_loan_line,access_account_loan_line,loan_management.model_account_loan_line,base.group_user,1,1,1,1
+loan_management.access_account_loan_generate_wizard,access_account_loan_generate_wizard,loan_management.model_account_loan_generate_wizard,base.group_user,1,1,1,1
+loan_management.access_account_loan_pay_amount,access_account_loan_pay_amount,loan_management.model_account_loan_pay_amount,base.group_user,1,1,1,1
+loan_management.access_account_loan_post,access_account_loan_post,loan_management.model_account_loan_post,base.group_user,1,1,1,1
+loan_management.access_payment_borrower,access_payment_borrower,loan_management.model_payment_borrower,base.group_user,1,1,1,1

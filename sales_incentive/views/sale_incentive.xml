@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="sale_incentive_tree_view" model="ir.ui.view">
+        <field name="name">sale.incentive.view.tree</field>
+        <field name="model">sale.incentive</field>
+        <field name="priority">8</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="product"/>
+                <field name="total_price"/>
+                <field name="incentive"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="sale_incentive_form_view" model="ir.ui.view">
+        <field name="name">sale.incentive.view.form</field>
+        <field name="model">sale.incentive</field>
+        <field name="priority">8</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="product"/>
+                        <field name="total_price"/>
+                        <field name="incentive"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="sale_incentive_view_pivot" model="ir.ui.view">
+        <field name="name">sale.incentive.view.pivot</field>
+        <field name="model">sale.incentive</field>
+        <field eval="2" name="priority"/>
+        <field name="arch" type="xml">
+            <pivot string="Incentive">
+                <field name="name" invisible='1'/>
+                <field name="product"/>
+                <field name="date_order" interval="month" type='col'/>
+                <field name="total_price"/>
+                <field name="incentive" type='measure'/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_total_incentive13" model="ir.actions.act_window">
+        <field name="name">Sale Incentive</field>
+        <field name="res_model">sale.incentive</field>
+        <field name="view_mode">tree,form,pivot</field>
+    </record>
+
+    <menuitem
+        id="menu_total_incentive12"
+        name="Total Incentive"
+        parent="sale.menu_sale_order" 
+        action="action_total_incentive13"/>
+
+</odoo>

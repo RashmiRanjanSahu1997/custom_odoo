@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <template id="report_invoicing_template">
+            <t t-set="data_report_landscape" t-value="True"/>
+            <t t-set="full_width" t-value="True"/>
+            <t t-call="web.html_container">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="docs" t-as="o">
+                        <t t-foreach="o.get_report_values_with_account_move()" t-as="val">
+                            <div class="oe_structure"/>
+                            <t t-foreach="val['total_months']" t-as="month">
+                                <div>
+                                    <h1 style="page-break-before:always;">
+                                        <p align="center">
+                                            <h1 class="text-center"
+                                                style="background-color:#f2f4f8;border:1px solid white;">
+                                                <b>Vendors Bills Details</b>
+                                            </h1>
+                                        </p>
+                                    </h1>
+                                </div>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

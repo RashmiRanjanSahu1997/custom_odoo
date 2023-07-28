@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="invoicing_date_form" model="ir.ui.view">
+        <field name="name">invoicing.date.form.view</field>
+        <field name="model">invoicing.date</field>
+        <field name="arch" type="xml">
+            <form string="Invoicing Date">
+                <sheet>
+                    <group>
+                        <field name='start_date'/>
+                        <field name='end_date'/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name='get_pdf_report' string='Download Pdf' type='object'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="set_invoicing_date_action" model="ir.actions.act_window">
+        <field name="name">Invoicing Date</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoicing.date</field>
+        <field name="view_mode">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

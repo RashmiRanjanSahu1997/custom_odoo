@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="all_tickets_action" model="ir.actions.act_window">
+        <field name="name">All Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.tickets</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="all_tickets_tree_view" model="ir.ui.view">
+        <field name="name">All.Tickets.Tree.View</field>
+        <field name="model">helpdesk.tickets</field>
+        <field name="arch" type="xml">
+            <tree string="All Tickets" decoration-info="state_id == 'done'" decoration-danger="state_id == 'cancel'">
+                <field name="helpdesk_teams_id" optional="show"/>
+                <field name="age" optional="hide"/>
+                <field name="gender" optional="hide"/>
+                <field name="user_id" class="field_user_id" widget="many2one_avatar_user"/>
+                <field name="type_r"/>
+                <!--                <field name="activity_ids" widget="list_activity" />-->
+                <field name="prioritys" widget="priority"/>
+                <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="active" invisible="1"/>
+                <field name="company_id"/>
+                <field name="customer_id" widget="res_partner_many2one"/>
+                <field name="customer_email" widget="email" string="Email" optional="hide"/>
+                <field name="customer_phone" widget="phone" string="Phone" optional="hide"/>
+                <field name="customer_task_ids"/>
+                <field name="active" invisible="1"/>
+                <field name="state_id" string="Status"
+                       decoration-info="state_id == 'new'"
+                       decoration-warning="state_id  == 'progress'"
+                       decoration-success="state_id == 'done'"
+                       decoration-danger="state_id == 'cancel'"
+                       widget="badge"/>
+            </tree>
+        </field>
+    </record>
+    <record id="all_tickets_form_view" model="ir.ui.view">
+        <field name="name">All.Tickets.Form.View</field>
+        <field name="model">helpdesk.tickets</field>
+        <field name="arch" type="xml">
+            <form string="All Tickets">
+                <header>
+                    <button name="helpdesk_start_action" type="object" string="Start"
+                            class="btn-primary"/>
+                    <button name="helpdesk_stop_action" type="object" string="Stop" class="btn-primary"
+                            icon="fa-clock-o"/>
+                    <button name="helpdesk_pause_action" type="object" string="Pause" class="btn-primary"
+                            attrs="{'invisible': [('state_id', 'in', ['done', 'cancel'])]}"/>
+                    <button name="helpdesk_resume_action" type="object" string="Resume" class="btn-primary"
+                            attrs="{'invisible': [('state_id', 'in', ['done', 'cancel'])]}"/>
+                    <button name="return_order" type="object" string="Return" class="btn-primary"
+                            attrs="{'invisible': [('company_id', '=', False)]}"/>
+                    <!-- <button name="%(helpdesk_community.helpdesk_order_repair_action)d" string="Repair" type="action" class="btn-primary"
+                            attrs="{'invisible': [('company_id', '=', False)]}"/> -->
+                    <button name="coupon" type="object" string="Coupon" class="btn-primary"
+                            attrs="{'invisible': [('company_id', '=', False)]}"/>
+                    <button name="plan_intervention" type="object" string="Plan Intervention" class="btn-primary"
+                            attrs="{'invisible': [('company_id', '=', False)]}"/>
+                    <button special="cancel" string="Cancel" class="btn-secondary"/>
+                    <field name="state_id" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="tickets_form_view"
+                                type="object" icon="fa-life-ring"
+                                attrs="{'invisible': [('customer_id', '=', False)]}"
+                                help="Ticket from this task">
+                            <div class="o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="custom_tickets"/>
+                                </span>
+                                <span class="o_stat_text">
+                                    Tickets
+                                </span>
+                            </div>
+                        </button>
+                    </div>
+
+                    <div class="oe_title" id='title'>
+                        <label for="name" class="oe_edit_only"/>
+                        <h1 id="name">
+                            <field name="name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="helpdesk_teams_id"/>
+                            <field name="type_r"/>
+                            <field name="user_id" widget="many2one_avatar_user"/>
+                            <field name="prioritys" class="oe_inline" widget="priority"/>
+                            <field name="tags_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="active" invisible="1"/>
+                            <field name="company_id"/>
+                            <field name="display_timer_start_primary" invisible="1"/>
+                            <field name="display_timer_start_secondary" invisible="1"/>
+                        
+                            <field name="display_timer" invisible="1"/>
+                            <field name="timer_start" widget="timer"
+                                   class="text-danger ml-auto h2 ml-4 font-weight-bold"/>
+                            <field name="timer_pause"/>
+                            <field name="is_timer_running" invisible="1"/>
+                            <!--                            <field name="res_model"/>-->
+                            <!--                            <field name="res_id"/>-->
+                        </group>
+                        <group>
+                            <field name="customer_id" widget="res_partner_many2one"/>
+                            <field name="customer_email" widget="email" string="Email"/>
+                            <field name="customer_phone" widget="phone" string="Phone"/>
+                            <field name="customer_task_ids"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <group>
+                                <field name="description" placeholder="Description of the ticket..."/>
+                                <span>
+                                    Hi,
+
+                                    I have purchased a "Drawer" from your store but the slides and the handle seem to
+                                    have a
+                                    defect.
+
+                                    Would it be possible for you to fix it?
+
+                                    Regards,
+                                    Deco
+                                </span>
+                            </group>
+                        </page>
+                        <page string="Timesheets">
+                            <field name="account_timesheet_ids">
+                                <tree string="Timesheet Activities" editable="bottom">
+                                    <field name="account_date"/>
+                                    <field name="user_id" widget="many2one_avatar_user"/>
+                                    <field name="account_name"/>
+                                    <!--                                    <field name="account_unit_amount" type="measure" widget="timesheet_uom"/>-->
+                                    <field name="account_unit_amount" widget="timesheet_uom"
+                                           decoration-danger="account_unit_amount &gt; 24"/>
+                                </tree>
+                            </field>
+                            <field name="total_hours_spent" widget="timesheet_uom" nolabel="1"/>
+
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

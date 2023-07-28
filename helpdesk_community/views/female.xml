@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="female_action" model="ir.actions.act_window">
+        <field name="name">Female.Action</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.tickets</field>
+        <field name="context">{'default_gender': 'female'}</field>
+        <!--        by defalut female will fill in but in all tickets-->
+        <field name="domain">['|', ('gender', '=', 'female'), ('age','&lt;=', 20)]</field>
+        <!--        all female will show + all child and male get of less then 20 -->
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="female_categ"
+              name="All Female"
+              parent="tickets_categ"
+              action="female_action"
+              sequence="22"/>
+
+</odoo>

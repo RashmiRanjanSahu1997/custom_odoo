@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="loan_management_view_form" model="ir.ui.view">
+        <field name="name">loan_management.info.form</field>
+        <field name="model">loan.management</field>
+        <field name="arch" type="xml">
+            <form string="loan_management Info">
+                <header>
+                    <button name="extra_payments" type="object" string="Extra Payments" class="oe_highlight"
+                            attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                    <button name="Postpone_installments" type="object" string="Postpone Installments"
+                            attrs="{'invisible': [('status', '!=', 'draft')]}"
+                            class="oe_highlight"/>
+                    <button name="cancel_loan" type="object" string="Cancel Loan"
+                            attrs="{'invisible': [('status', '!=', 'draft')]}"/>
+                    <button name="close_loan" type="object" string="Close Loan"
+                            attrs="{'invisible': [('status', '=', 'draft')]}"/>
+
+                    <field name="status" widget="statusbar" class="oe_highlight" options="{'clickable': '1'}"/>
+
+                    <button name="amount_si" type="object" string="Computed Values" class="oe_highlight"
+                            attrs="{'invisible': [('status', '=', 'draft')]}"/>
+                    <button name="method_validation" type="object" string="Validate" class="oe_highlight"
+                            confirm="Do you really want to validate the loan? After that no changes to the accounts or amount are allowed!  Define Insurance and tax if land countract loan!"
+                            attrs="{'invisible': [('status', '=', 'draft')]}"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" type="object" name="action_view_vendor_bill"
+                                icon="fa-file-text-o">
+                            <field string="Vendor Bills" name="vendor_bill_count" widget="statinfo"/>
+                        </button>
+                        <button type="object" class="oe_stat_button" icon="fa-pencil-square-o"
+                                name="method_invoice">
+                            <field string="Invoice" name="invoice_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="action_view_payments"
+                                icon="fa-file-text-o">
+                            <field string="Payments" name="payment_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="method_journal_items"
+                                icon="fa-file-text-o">
+                            <field string="Journal Items" name="journal_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="method_insurances"
+                                icon="fa-pencil-square-o">
+                            <field string="Insurances" name="insurances_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="method_tax_items"
+                                icon="fa-pencil-square-o">
+                            <field string="Tax Items" name="tax_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="method_payment_transaction"
+                                icon="fa-file-text-o">
+                            <field string="Transactions" name="payment_transaction_count" widget="statinfo"/>
+                        </button>
+                        <button class="oe_stat_button" type="object" name="method_payment"
+                                icon="fa-user">
+                            <field string="Payments" name="payment_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <h1>
+                        <field name="reference_no"/>
+                    </h1>
+                    <group>
+                        <!--                        <field name="image" widget="image" class="oe_avatar" options="{'size': [90, 90]}"/>-->
+                        <group>
+                            <field name="customer"/>
+                            <field name="loan_amount"/>
+                            <field name="is_land_contract"/>
+                            <field name="down_payment"/>
+                            <field name="rate"/>
+
+                            <field name="starting_date"/>
+                            <field name="installment_due_date"/>
+                            <field name="closing_date"/>
+                            <field name="no_of_installment"/>
+                            <field name="time_between_two_installments"/>
+                        </group>
+                        <group>
+                            <field name="products"/>
+                            <field name="rate_per_month"/>
+                            <field name="round_on_end"/>
+                            <field name="upcoming_invoice_amount"/>
+                            <field name="total_amount_date"/>
+                            <field name="days_due"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Installments">
+                            <field name="loan_lines_ids">
+                                <tree editable="bottom">
+                                    <field name="seq" required="1"/>
+                                    <field name="days_due"/>
+                                    <field name="pending_principal"/>
+                                    <field name="loan_payment"/>
+                                    <field name="principal"/>
+                                    <field name="interests"/>
+                                    <field name="total_amount"/>
+                                    <field name="amount_due"/>
+                                    <field name="paid_on"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Tax and Insurances">
+                            <group>
+                                <group>
+                                    <field name="property_insurances"/>
+                                    <field name="property_tax"/>
+                                </group>
+                                <group>
+
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Installment Changes">
+                            <group>
+                                <group>
+                                    <field name="property_insurances"/>
+                                    <field name="property_tax"/>
+                                </group>
+                                <group>
+
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="loan_management_tree_view" model="ir.ui.view">
+        <field name="name">loan_management.info.tree.view</field>
+        <field name="model">loan.management</field>
+        <field name="arch" type="xml">
+            <tree string="loan_management Information">
+                <field name="customer"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="loan_management_details_action" model="ir.actions.act_window">
+        <field name="name">loan_management Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">loan.management</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+
+    <record id="payment_invoice_actionss" model="ir.actions.server">
+			<field name="name">Invoice</field>
+			<field name="model_id" ref="loan_management.model_loan_management"/>
+			<field name="binding_model_id" ref="loan_management.model_loan_management"/>
+			<field name="state">code</field>
+			<field name="binding_view_types">form</field>
+			<field name="code">action = records.update_price_product()
+			</field>
+		</record>
+        
+        
+
+</odoo>

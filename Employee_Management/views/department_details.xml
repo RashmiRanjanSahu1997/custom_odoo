@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_department_details_tree" model="ir.ui.view">
+        <field name="name">department.details.tree</field>
+        <field name="model">department.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="head_name"/>
+                <field name="company_id"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="department_details_form_view" model="ir.ui.view">
+        <field name="name">department.details.form.view</field>
+        <field name="model">department.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <button type="object" name="random_no_field" string="Random No"/>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="head_name"/>
+                        </group>
+                        <group>
+                            <field name="company_id" widget="many2one_tags"/>
+                            <field name="type"/>
+                            <field name="random_no"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_department_details_kanban" model="ir.ui.view">
+        <field name="name">department.details.kanban.view</field>
+        <field name="model">department.details</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="name"/>
+                <field name="head_name"/>
+                <field name="company_id"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <strong>
+                                <field name="name"/>
+                            </strong>
+                            <div>
+                                <li>
+                                    <field name="head_name"/>
+                                </li>
+                                <li>
+                                    <field name="company_id"/>
+                                </li>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="department_details_action" model="ir.actions.act_window">
+        <field name="name">Department Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">department.details</field>
+        <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_department_details"
+              name="Department Details"
+              action="department_details_action"
+              parent="Employee_Management.menu_main_company_details"/>
+
+</odoo>

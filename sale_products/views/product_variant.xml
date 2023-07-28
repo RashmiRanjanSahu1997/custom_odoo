@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="set_product_discount_action_server" model="ir.actions.server">
+            <field name="name">Set Discount</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_product_product" />
+            <field name="binding_model_id" ref="model_product_product" />
+            <field name="state">code</field>
+            <field name="code">action=model.set_product_discount()</field>
+        </record>
+    </data>
+</odoo>

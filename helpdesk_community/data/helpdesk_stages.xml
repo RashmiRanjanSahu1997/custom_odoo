@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+<!--    <record id="helpdesk_team1" model="helpdesk.team">-->
+<!--        <field name="name">Customer Care</field>-->
+<!--        <field name="alias_name">support</field>-->
+<!--        <field name="stage_ids"-->
+<!--               eval="False"/> &lt;!&ndash; eval=False to don't get the default stage. New stages are setted below&ndash;&gt;-->
+<!--    </record>-->
+
+    <!-- stage "New" gets created by default with sequence 0-->
+    <record id="helpdesk_state_new" model="helpdesk.state">
+        <field name="name">New</field>
+        <field name="sequence">0</field>
+<!--        <field name="team_ids" eval="[(4, ref('helpdesk_team1'))]"/>-->
+        <field name="is_close" eval="False"/>
+    </record>
+    <record id="helpdesk_state_in_progress" model="helpdesk.state">
+        <field name="name">In Progress</field>
+        <field name="sequence">1</field>
+<!--        <field name="team_ids" eval="[(4, ref('helpdesk_team1'))]"/>-->
+        <field name="is_close" eval="False"/>
+    </record>
+    <record id="helpdesk_state_solved" model="helpdesk.state">
+        <field name="name">Solved</field>
+<!--        <field name="team_ids" eval="[(4, ref('helpdesk_team1'))]"/>-->
+        <field name="sequence">2</field>
+        <field name="is_close" eval="True"/>
+        <field name="fold" eval="True"/>
+    </record>
+    <record id="helpdesk_state_cancelled" model="helpdesk.state">
+        <field name="name">Cancelled</field>
+        <field name="sequence">3</field>
+<!--        <field name="team_ids" eval="[(4, ref('helpdesk_team1'))]"/>-->
+        <field name="is_close" eval="True"/>
+        <field name="fold" eval="True"/>
+    </record>
+</odoo>
+

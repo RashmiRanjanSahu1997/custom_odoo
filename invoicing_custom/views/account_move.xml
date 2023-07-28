@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    
+    <menuitem name="Select Date" id="invoicing_date_menu" 
+    parent="account.menu_finance_receivables"
+    action="invoicing_custom.set_invoicing_date_action"
+    sequence="90"/>
+
+</odoo>

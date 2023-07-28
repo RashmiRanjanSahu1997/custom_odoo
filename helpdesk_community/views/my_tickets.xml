@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="my_tickets_action" model="ir.actions.act_window">
+        <field name="name">My Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.tickets</field>
+        <field name="context">{'search_default_filter_male': 1,'search_default_group_by_gender': 1}</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="my_tickets_tree_view" model="ir.ui.view">
+        <field name="name">MY.Tickets.Tree.View</field>
+        <field name="model">helpdesk.tickets</field>
+        <field name="arch" type="xml">
+            <tree string="My Tickets">
+                <field name="helpdesk_teams_id"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="active" invisible="1"/>
+                <field name="state_id" widget="badge"
+                       decoration-info="state_id == 'new'"
+                       decoration-warning="state_id  == 'progress'"
+                       decoration-success="state_id == 'done'"
+                       decoration-danger="state_id == 'cancel'"/>
+            </tree>
+        </field>
+    </record>
+    <record id="my_tickets_form_view" model="ir.ui.view">
+        <field name="name">MY.Tickets.Form.View</field>
+        <field name="model">helpdesk.tickets</field>
+        <field name="arch" type="xml">
+            <form string="My Tickets">
+                <header>
+                    <field name="state_id" widget="statusbar" nolabel="1"
+                           options="{'clickable': '1'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="helpdesk_teams_id"/>
+                        <field name="age"/>
+                        <field name="gender"/>
+                        <field name="active" invisible="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="watermark_template_report">
+        <t t-call="web.html_container">
+<!--                        <t t-call="web.internal_layout">-->
+
+<!--            <t t-call="web.external_layout">-->
+<!--                <t t-foreach="docs" t-as="t">-->
+                    <div class="page">
+                        <!--                        <div style="position:absolute;text-align:center;z-index:-1;border:0;opacity:0.15;padding-top:330px;padding-left:145px;">-->
+                        <!--                            <img t-att-src="'data:image/png;base64,%s' %to_text(o.user_company.logo)"-->
+                        <!--                                 style="height:600px;opacity:0.15;"/>-->
+
+                        <h2>YOUR TICKET REPORT</h2>
+<!--                        <span t-field="t.name"/>-->
+
+                    </div>
+
+<!--                </t>-->
+<!--            </t>-->
+        </t>
+    </template>
+
+        <record id="helpdesk_report" model="report.paperformat">
+            <field name="name">helpdesk Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+    <report
+            id="watermark_report_main"
+            model="helpdesk.tickets"
+            report_type="qweb-pdf"
+            string="Ticket Reort"
+            name="helpdesk_community.watermark_template_report"
+            paperformat="helpdesk_community.helpdesk_report"
+            file="Report"
+    />
+
+
+</odoo>

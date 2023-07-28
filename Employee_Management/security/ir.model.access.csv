@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_details_manager,employee_details_manager,model_employee_details,Employee_Management.group_emp_mng_manager,1,0,0,0
+access_employee_details_admin,employee_details_admin,model_employee_details,Employee_Management.group_emp_mng_admin,1,1,1,1
+access_company_details,company_details,model_company_details,,1,1,1,1
+access_project_details,project_details,model_project_details,,1,1,1,1
+access_department_details,department_details,model_department_details,,1,1,1,1
+access_hr_details,hr_details,model_hr_details,,1,1,1,1
+access_leaves_details,leaves_details,model_leaves_details,,1,1,1,1
+access_designation_details,designation_details,model_designation_details,,1,1,1,1
+access_company_project,company_project,model_company,,1,1,1,1
+

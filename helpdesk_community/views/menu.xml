@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="helpdesk_root"
+              name="Helpdesk"
+              sequence="0"/>
+
+    <menuitem id="helpdesk_categ"
+              name="Overview"
+              parent="helpdesk_root"
+              sequence="10"/>
+
+    <menuitem id="tickets_categ"
+              name="Tickets"
+              parent="helpdesk_root"
+              sequence="15"/>
+
+    <menuitem id="all_tickets_categ"
+              name="All Tickets"
+              parent="tickets_categ"
+              action="all_tickets_action"
+              sequence="18"/>
+
+
+    <menuitem id="my_tickets_categ"
+              name="My Tickets"
+              parent="tickets_categ"
+              action="my_tickets_action"
+              sequence="20"/>
+
+    <menuitem id="helpdesk_configuration_details"
+              name="Configuration"
+              parent="helpdesk_root"
+              sequence="25"/>
+
+    <menuitem id="helpdesk_teams_categ"
+              name="Helpdesk Support Teams"
+              parent="helpdesk_configuration_details"
+              action="helpdesk_action"
+              sequence="50"/>
+
+    <menuitem id="helpdesk_state_menu"
+              name="Helpdesk States"
+              action="helpdesk_state_action"
+              parent="helpdesk_configuration_details"
+              sequence="55" />
+
+    <menuitem id="helpdesk_tickets_tags"
+              name="Ticket Tags"
+              parent="helpdesk_configuration_details"
+              action="tickets_tags_action"
+              sequence="60"/>
+
+
+    <record id="my_all_tickets_search" model="ir.ui.view">
+        <field name="name">My.All.Tickets.Search</field>
+        <field name="model">helpdesk.tickets</field>
+        <field name="arch" type="xml">
+            <search string="Menu">
+                <field name="helpdesk_teams_id"
+                       filter_domain="['|', ('helpdesk_teams_id', 'ilike', self), ('age', 'ilike', self)]"
+                       string="Name"/>
+                <field name="age"/>
+                <!--                <filter name="gender" string="Male" domain="[('male', '=',Male)]"/>-->
+                <filter name="filter_male" string="Male" domain="[('gender', '=', 'male')]"/>
+                <filter name="filter_female" string="Female" domain="[('gender', '=', 'female')]"/>
+                <separator/>
+                <filter string="Age" domain="[('age','&lt;=', 20)]" name="Kids"/>
+                <separator/>
+                <filter string="Archive" domain="[('active','=', False)]" name="Kids"/>
+                <!--                <=-->
+                <group expand="0" string="Group By">
+                    <filter string="Gender" name="group_by_gender" domain="[]" context="{'group_by':'gender'}"/>
+                </group>
+<!--                <searchpanel>-->
+<!--                    <field name="gender" string="All Tickets" enable_counters="1"/>-->
+<!--                </searchpanel>-->
+            </search>
+        </field>
+    </record>
+
+
+    <!--    <record id="all_male_by_default_action" model="ir.actions.act_window">-->
+    <!--        <field name="name">All.Male.By.Default.Action</field>-->
+    <!--        <field name="type">ir.actions.act_window</field>-->
+    <!--        <field name="res_model">helpdesk.tickets</field>-->
+    <!--        <field name="context">{'search_default_filter_male': 1}</field>-->
+    <!--    <field name="context">{'search_default_group_by_gender': '1'}</field>-->
+    <!--        <field name="view_mode">tree,form</field>-->
+    <!--    </record>-->
+</odoo>

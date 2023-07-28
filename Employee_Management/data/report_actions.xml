@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="company_details_pdf_badge" model="ir.actions.report">
+        <field name="name">Print Company Details</field>
+        <field name="model">company.details</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Employee_Management.print_company_details</field>
+        <field name="report_file">Employee_Management.print_company_details</field>
+<!--        <field name="print_report_name">'Print Badge - %s' % (object.name).replace('/', '')</field>-->
+        <field name="binding_model_id" ref="model_company_details"/>
+        <field name="binding_type">report</field>
+        </record>
+
+        <record id="employee_report" model="ir.actions.report">
+            <field name="name">Print Details</field>
+            <field name="model">employee.details</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">Employee_Management.print_employee_details</field>
+            <field name="report_file">Employee_Management.print_employee_details</field>
+    <!--        <field name="print_report_name">'Print Badge - %s' % (object.name).replace('/', '')</field>-->
+            <field name="binding_model_id" ref="model_employee_details"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

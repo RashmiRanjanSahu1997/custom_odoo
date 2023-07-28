@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="multiple_appointment_calendar_form_view" model="ir.ui.view">
+			<field name="name">multiple.appointment.form.view</field>
+			<field name="model">multiple.appointment</field>
+			<field name= "arch" type = "xml">
+				<form>
+					<sheet>
+						<group>
+							<group>
+								<field name="name"/>
+								<field name="date"/>
+								<field name="active" widget="boolean_toggle"/>
+							</group>
+							<group>
+								<field name="age"/>
+								<field name="color" widget="color_picker"/>
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+
+	<record id="multiple_appointment_calendar_tree_view" model="ir.ui.view">
+			<field name="name">multiple.appointment.tree.view</field>
+			<field name="model">multiple.appointment</field>
+			<field name= "arch" type = "xml">
+				<tree string="multiple appointment calendar">
+					<field name="name"/>
+					<field name="date"/>
+					<field name="age"/>
+					<field name="color"/>
+					<field name="active"/>
+				</tree>
+			</field>
+		</record>
+	<record id="multiple_appointment_calendar_kanban_view" model="ir.ui.view">
+            <field name="name">multiple.appointment.calendar.kanban</field>
+            <field name="model">multiple.appointment</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="date"/>
+					<field name="age"/>
+					<field name="color"/>
+					<field name="active"/>
+					<templates>
+						<t t-name="kanban-box">
+							<div class="oe_kanban_global_click">
+								<div class="oe_kanban_details">
+									<ul>
+										<li>
+											<field name="name"/>
+										</li>
+										<li>
+											<field name="date"/>
+										</li>
+									</ul>
+								</div>
+
+							</div>
+						</t>
+
+					</templates>
+				</kanban>
+			</field>
+		</record>
+	<record id="action_multiple_appointment_calendar" model="ir.actions.act_window">
+		<field name="name">Multiple Calendar</field>
+		<field name="res_model">multiple.appointment</field>
+		<field name="view_mode">tree,form,kanban</field>
+
+	</record>
+	<menuitem id="menu_multiple_appointment_calendar"
+	name="Multiple Calendar"
+  	action="action_multiple_appointment_calendar"
+	/>
+</odoo>

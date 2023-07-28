@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="library_management_view_form" model="ir.ui.view">
+        <field name="name">library.management.view.form</field>
+        <field name="model">library.management</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="get_student" type="object" class="oe_stat_button" icon="fa-globe icon">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_value">
+                                    <field name="no_of_students"/>
+                                </span>
+                                <span class="o_stat_text">Students</span>
+                            </div>
+                        </button>
+                    </div>
+                    <group>
+                        <!-- <group> -->
+                            <field name="name"/>
+                            <field name="no_of_students"/>
+                            <field name="notice"/>
+                            <!-- <field name="student_ids">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="library_id"/>
+                                </tree>
+                            </field> -->
+                        <!-- </group> -->
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="library_management_view_tree" model="ir.ui.view">
+        <field name="name">library.management.view.tree</field>
+        <field name="model">library.management</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="student_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="library_management_view_kanban" model="ir.ui.view">
+        <field name="name">library.management.view.kanban</field>
+        <field name="model">library.management</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row">
+                                <div class="col-6">
+                                    <field name="name"/>
+                            <field name="no_of_students"/>
+
+                                </div>
+                                <div class="col-6">
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_library_management" model="ir.actions.act_window">
+        <field name="name">Library Management</field>
+        <field name="res_model">library.management</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_library_management"
+        name="Library Management"
+        action="action_library_management"
+        web_icon="library_management,static/description/icon.png"/>
+</odoo>

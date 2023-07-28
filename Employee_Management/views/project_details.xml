@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="project_details_form_view" model="ir.ui.view">
+			<field name="name">project.form.view</field>
+			<field name="model">project.details</field>
+			<field name= "arch" type = "xml">
+                    <form>
+                        <header>
+                            <field name="state" widget="statusbar"  statusbar_visible="processing,completed,delivered"/>
+                            <button type="object" name="set_completed" string="Completed"
+                                    attrs="{'invisible':[('state','in',['completed','delivered'])]}"/>
+                            <button type="object" name="set_delivered" string="Delivered"
+                                    attrs="{'invisible':[('state','in',['delivered','processing'])]}"/>
+                            <button name="%(Employee_Management.company_project_action)d" type="action" string="create company" class="btn btn-primary"/>
+
+                        </header>
+                        <sheet>
+                            <div class="oe_button_box" name="button_box">
+                                <button name="empty" type="object" class="oe_stat_button" icon="fa-globe icon">
+                                    <div class="o_field_widget o_stat_info">
+                                        <span class="o_stat_text">Total Employees</span>
+                                        <span class="o_stat_value">
+                                            <field name="total_employees" widget='integer'/>
+                                        </span>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="priority" widget="priority" class="mr-3"/>
+                                </h1>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="name"/>
+                                    <field name="start_date" attrs="{'readonly':[('company_id','=',False)]}"/>
+                                    <field name="end_date"/>
+                                </group>
+                                <group>
+                                    <field name="budget"/>
+                                    <field name="company_id" widget="selection"/>
+                                </group>
+                            </group>
+                            <notebook>
+                                <page string="Add Employees" name="project">
+                                    <group>
+                                        <field name="emp_id" widget="many2many_tags"/>
+                                    </group>
+                                </page>
+                                <page name="Demo">
+                                </page>
+                            </notebook>
+                        </sheet>
+                    </form>
+            </field>
+        </record>
+
+    <record id="project_details_tree_view" model="ir.ui.view">
+            <field name="name">project.details.tree</field>
+            <field name="model">project.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="start_date"/>
+                    <field name="end_date"/>
+                    <field name="budget"/>
+                    <field name="emp_id" widget="many2many_tags"/>
+                    <field name="priority"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+    <record id="project_details_kanban_view" model="ir.ui.view">
+        <field name="name">project.details.kanban</field>
+        <field name="model">project.details</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="name"/>
+                <field name="start_date"/>
+                <field name="end_date"/>
+                <field name="budget"/>
+                <field name="emp_id"/>
+                <field name="priority"/>
+                <field name="state"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+								<div class="oe_kanban_details">
+                                    <ul>
+                                        <li>
+                                            <field name="name"/>
+                                        </li>
+                                        <li>
+                                            <field name="start_date"/>
+                                            <field name="end_date"/>
+                                        </li>
+                                        <li>
+                                            <field name="budget"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                        </div>
+                    </t>
+                </templates>
+
+            </kanban>
+        </field>
+    </record>
+
+    <record id="project_details_action" model="ir.actions.act_window">
+            <field name="name">Project Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">project.details</field>
+            <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_project_details"
+              name="Project Details"
+              action="project_details_action"
+              parent="Employee_Management.menu_main_company_details"/>
+
+</odoo>

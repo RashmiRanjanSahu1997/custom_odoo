@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="company_project_form_view">
+        <field name="name">company.project.form</field>
+        <field name="model">company</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="emp_ids" widget="many2many_checkboxes"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="type"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button type="object" name="CreateCompany" string="Add company" class="btn btn-success"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="company_project_action">
+        <field name="name">Company Project</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">company</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,35 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.product</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="15"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Amount" 
+                            string="Sales Amount" data-key="settings">
+                    <h2>Amount</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_left_pane"/>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">SET AMOUNT</span>
+                                <div class="text-muted content-group mt16">
+                                    <field name="sale_amount" 
+                                                class="text-center oe_inline" />
+                                </div>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">Choose Manager</span>
+                                <div class="text-muted content-group mt16">
+                                    <field name="sales_manager" 
+                                                class="text-center oe_inline" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

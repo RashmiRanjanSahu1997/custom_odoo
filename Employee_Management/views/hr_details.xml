@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hr_details_form_view" model="ir.ui.view">
+			<field name="name">hr.form.view</field>
+			<field name="model">hr.details</field>
+			<field name= "arch" type = "xml">
+                <form>
+                        <sheet>
+                            <field name="image" class="oe_avatar" widget="image"/>
+                            <div class="or_title">
+                                <h1>
+                                    <field class="o_text_overflow" name="name" placeholder="Enter Name"/>
+                                </h1>
+                            </div>
+                            <group>
+                                <group>
+                                    <field name="mob_no"/>
+                                    <field name="address"/>
+                                </group>
+                                <group>
+                                    <field name="company_id"/>
+                                </group>
+                            </group>
+                        </sheet>
+                    </form>
+            </field>
+        </record>
+
+    <record id="view_hr_details_tree" model="ir.ui.view">
+        <field name="name">hr.details.tree</field>
+        <field name="model">hr.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="mob_no"/>
+                <field name="address"/>
+                <field name="company_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="view_hr_details_kanban" model="ir.ui.view">
+        <field name="name">hr.details.kanban</field>
+        <field name="model">hr.details</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" sample="1">
+                <field name="image"/>
+                <field name="name"/>
+                <field name="mob_no"/>
+                <field name="address"/>
+                <field name="company_id"/>
+                <field name="id"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="o_kanban_image">
+                                <img class="o_kanban_image_inner_pic" alt="Avatar"
+                                     t-att-src="kanban_image('hr.details','image',record.id.raw_value)"/>
+                            </div>
+                            <div>
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <ul>
+                                    <li>
+                                        <field name="mob_no"/>
+                                    </li>
+                                    <li>
+                                        <field name="address"/>
+                                    </li>
+                                    <li>
+                                        <field name="company_id"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="hr_details_action" model="ir.actions.act_window">
+            <field name="name">Hr Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">hr.details</field>
+            <field name="view_mode">tree,kanban,form</field>
+    </record>
+
+    <menuitem id="menu_hr_details"
+              name="Hr Details"
+              action="hr_details_action"
+              parent="Employee_Management.menu_employee_details"/>
+
+</odoo>

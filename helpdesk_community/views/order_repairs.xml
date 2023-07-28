@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="helpdesk_order_repair_form_view" model="ir.ui.view">
+        <field name="name">helpdesk.order.form.view</field>
+        <field name="model">helpdesk.order.repair</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <button name="confirm_repair" type="object" string="CONFIRM REPAIR" class="btn-primary"
+                    attrs="{'invisible': [('status_id','=','confirme')]}"/>
+                    <button name="start_repair"
+                            attrs="{'invisible': [('status_id','!=','confirme')]}"
+                            type="object" string="START REPAIR"/>
+                    <button name="cancel_repair" attrs="{'invisible': [('status_id','!=','confirme')]}"
+                            type="object" string="CANCEL REPAIR"/>
+
+                    <button name="send_quotation_order" type="object" string="SEND QUOTATION" class="btn-primary"
+                            attrs="{'invisible': [('status_id','!=','quotation')]}"/>
+                    <button name="print_quotation_order" type="object" string="PRINT QUOTATION" class="btn-primary"
+                            attrs="{'invisible': [('status_id','!=','quotation')]}"/>
+                    <button name="cancel_repair" type="object" string="RESET TO QUOTATION" class="btn-primary"
+                            states="quotation"/>
+                    <field name="status_id" widget="statusbar" statusbar_visible="quotation,confirme,repaired"/>
+                    <!--                    <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,assigned,done" />-->
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="helpdesk_order_repair_action" model="ir.actions.act_window">
+        <field name="name">helpdesk.order.repair</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">helpdesk.order.repair</field>
+        <field name="view_mode">form</field>
+    </record>
+
+</odoo>

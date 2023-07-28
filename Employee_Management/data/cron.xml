@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="leave_count_details" model="ir.cron">
+        <field name="name">Leaves Count</field>
+        <field name="model_id" ref="model_leaves_details"/>
+        <field name="state">code</field>
+        <field name="code">model.count_details()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <!-- <field name="active">False</field> -->
+    </record>
+</odoo>

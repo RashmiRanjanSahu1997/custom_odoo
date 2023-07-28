@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="helpdesk_state_view_form" model="ir.ui.view">
+        <field name="name">helpdesk.state.form</field>
+        <field name="model">helpdesk.state</field>
+        <field name="arch" type="xml">
+            <form string="Stage Search">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="sequence" groups="base.group_no_one"/>
+                            <field name="team_ids" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                            <field name="template_id" options="{'no_create': True}"/>
+                        </group>
+                        <group>
+                            <field name="is_close"/>
+                            <field name="fold"/>
+                        </group>
+                    </group>
+                    <group string="Status Description ">
+                        <field name="description" placeholder="Add a description..." nolabel="1" colspan="2"
+                               options="{'collaborative': true, 'resizable': true}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="helpdesk_state_view_tree" model="ir.ui.view">
+        <field name="name">helpdesk.state.tree</field>
+        <field name="model">helpdesk.state</field>
+        <field name="arch" type="xml">
+            <tree string="Stage" multi_edit="1" sample="1">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="is_close"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="helpdesk_state_action" model="ir.actions.act_window">
+        <field name="name">Status</field>
+        <field name="res_model">helpdesk.state</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>
+
+
+

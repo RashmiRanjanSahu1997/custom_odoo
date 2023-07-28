@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_designation_details_form" model="ir.ui.view">
+        <field name="name">designation.details.form.view</field>
+        <field name="model">designation.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="emp_ids" widget="one2many_list" attrs="{'invisible':[('name','=',False)]}">
+                            <tree>
+                                <field name="name"/>
+                                <field name="mob"/>
+                                <field name="dob"/>
+                                <field name="company_id"/>
+                                <field name="gender"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_designation_details_tree" model="ir.ui.view">
+        <field name="name">designation.details.tree.view</field>
+        <field name="model">designation.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="emp_ids" widget="many2many_tags"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="designation_details_action" model="ir.actions.act_window">
+        <field name="name">Designation Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">designation.details</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="designation_python_action" model="ir.actions.act_window">
+        <field name="name">Python Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">designation.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('name','in',['python developer','Python Developer'])]</field>
+    </record>
+
+    <record id="designation_odoo_action" model="ir.actions.act_window">
+        <field name="name">Odoo Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">designation.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('name','in',['Odoo Developer','odoo developer'])]</field>
+    </record>
+
+    <record id="designation_django_action" model="ir.actions.act_window">
+        <field name="name">Django Details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">designation.details</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('name','in',['Django Developer','django developer'])]</field>
+    </record>
+
+    <menuitem id="menu_designation_details"
+              name="Designation"
+              sequence="3"
+              parent="Employee_Management.menu_employee_details"/>
+
+    <menuitem id="menu_main_designation_details"
+              name="Designation Details"
+              parent="Employee_Management.menu_designation_details"/>
+
+    <menuitem id="menu_total_designation_details"
+              name="All Designation"
+              sequence="0"
+              action="designation_details_action"
+              parent="Employee_Management.menu_main_designation_details"/>
+
+    <menuitem id="menu_python_developer"
+              name="Python Developer"
+              action="designation_python_action"
+              parent="Employee_Management.menu_main_designation_details"/>
+
+    <menuitem id="menu_odoo_developer"
+              name="Odoo Developer"
+              action="designation_odoo_action"
+              parent="Employee_Management.menu_main_designation_details"/>
+
+    <menuitem id="menu_django_developer"
+              name="Django Developer"
+              action="designation_django_action"
+              parent="Employee_Management.menu_main_designation_details"/>
+
+</odoo>

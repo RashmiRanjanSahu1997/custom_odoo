@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="student_view_form" model="ir.ui.view">
+        <field name="name">student.view.form</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button type="object" name="set_consideration" string="Under consideration" attrs="{'invisible': [('state','in',['consideration','confirmed'])]}"/>
+                    <!-- <button type="action" name="%(library_management.action_books)d" string="Books"/> -->
+                    <field name="state" widget="statusbar" statusbar_visible="draft,consideration,confirmed"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name" attrs="{'required': [('date_of_joining', '!=', False)]}"/>
+                        <field name="library_id"/>
+                        <field name="date_of_joining" attrs="{'readonly': [('is_active', '=', False)]}"/>
+                        <field name="is_active" attrs="{'invisible': [('date_of_joining', '=', False)]}"/>
+                        <field name="notice"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="student_view_tree" model="ir.ui.view">
+        <field name="name">student.view.tree</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="library_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="student_view_search" model="ir.ui.view">
+        <field name="name">student.view.search</field>
+        <field name="model">student</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="library_id"/>
+                <filter string="Active" name="filter_is_active" domain="[('is_active','=',True)]"/>
+                <group>
+                    <filter string="Status" name="groupby_is_active" context="{'group_by':'is_active'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_student" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">student</field>
+        <field name="view_mode">tree,form</field>
+
+        <!-- <field name="domain">[('name', 'in', ["A","B"])]</field> -->
+        <field name="context">{"search_default_filter_is_active": 1}</field>
+    </record>
+
+    <menuitem
+        id="menu_student"
+        name="Student"
+        action="action_student"
+        parent="library_management.menu_library_management"/>
+</odoo>

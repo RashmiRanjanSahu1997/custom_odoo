@@ -1,0 +1,41 @@
+<!-- <?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="employee_inherit_view_tree" model="ir.ui.view">
+            <field name="name">employee.details.tree.inherit</field>
+            <field name="model">employee.details</field>
+            <field name="inherit_id" ref="Employee_Management.view_employee_details_tree"/>
+            <field name="groups_id" eval="[Command.link(ref('Employee_Management.group_emp_mng_manager'))]"/>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name='name'/>
+                    <field name='city'/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="employee_group_action" model="ir.actions.act_window">
+            <field name="name">Employee Details</field>
+            <field name="res_model">employee.details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">tree</field>
+            <field name="groups_id" eval="[Command.link(ref('Employee_Management.group_emp_mng_manager'))]"/>
+            <field name="view_id" ref="view_employee_details_tree"/> -->
+            <!-- <field name="act_window_id" ref="action_employee"/>  -->
+            <!-- <field name="target">new</field> -->
+        <!-- </record>
+    </data>
+</odoo> -->
+<!-- <record id="tree_id" model="ir.actions.act_window.view"> 
+    <field eval="3" name="sequence"/>
+     <field name="view_mode">tree</field> 
+     <field name="view_id" ref="tree_view_id"/> 
+    <field name="act_window_id" ref="action_id"/>
+ </record> -->
+
+ <!-- <record id="tree_id1" model="ir.actions.act_window.view"> 
+    <field eval="3" name="sequence"/> 
+    <field name="view_mode">tree</field> 
+    <field name="view_id" ref="tree_view_id1"/>
+     <field name="act_window_id" ref="action_id1"/> 
+    </record> -->

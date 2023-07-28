@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mail_customer_action" model="ir.actions.act_window">
+        <field name="name">Email</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.customer</field>
+        <field name="view_mode">form</field>
+
+    </record>
+
+    <record id="mail_customer_form_view" model="ir.ui.view">
+        <field name="name">mail.customer.form</field>
+        <field name="model">mail.customer</field>
+        <field name="arch" type="xml">
+
+            <form string="Email">
+                <sheet>
+                    <group>
+                        
+                            <field name="name" widget='many2many_tags'/>
+                            <field name="sub"/>
+                             <field name="body"/>
+                        
+                    </group>
+                </sheet>
+                <footer>
+                    <button name='send_mail' string='Send Mail' type= 'object'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="loan_product_tree_view" model="ir.ui.view">
+        <field name="name">loan.product.tree.view</field>
+        <field name="model">loan.product</field>
+        <field name="arch" type="xml">
+            <tree string="Loan Product">
+                <field name="product"/>
+                <field name="price"/>
+                <field name="princie_id"/>
+            </tree>
+        </field>
+    </record> -->
+</odoo>

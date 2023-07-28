@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_employee_details_tree" model="ir.ui.view">
+        <field name="name">employee.details.tree</field>
+        <field name="model">employee.details</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="mob"/>
+                <field name="city"/>
+                <field name="dob"/>
+                <field name="gender"/>
+                <field name="age"/>
+                <field name="is_active"/>
+                <field name="designation_id"/>
+                <field name="salary"/>
+                <field name="cv"/>
+                <field name="company_id"/>
+                <field name="experience"/>
+                <field name="state"/>
+                <field name="company_address"/>
+            </tree>
+        </field>
+    </record>
+
+   
+
+
+
+    <!-- <record id="employee_inherit_view_tree" model="ir.ui.view">
+        <field name="name">employee.details.tree.inherit</field>
+        <field name="model">employee.details</field>
+         <field name="inherit_id" ref="Employee_Management.view_employee_details_tree"/>
+        <field name="groups_id" eval="[(4, ref('Employee_Management.group_emp_mng_manager'))]"/>
+        <field name="arch" type="xml">
+            <field name='city' position='attributes'>
+                <attribute name='invisible'>True</attribute>
+            </field>
+            <field name='designation_id' position='attributes'>
+                <attribute name='invisible'>True</attribute>
+            </field>
+            <field name='company_id' position='attributes'>
+                <attribute name='invisible'>True</attribute>
+            </field>
+            <field name='salary' position='attributes'>
+                <attribute name='invisible'>True</attribute>
+            </field>
+            <field name='state' position='attributes'>
+                <attribute name='invisible'>True</attribute>
+            </field>
+        </field>
+    </record> -->
+
+    <record id="view_employee_details_form" model="ir.ui.view">
+            <field name="name">employee.details.form.view</field>
+            <field name="model">employee.details</field>
+            <field name="groups_id" eval="[(4, ref('Employee_Management.group_emp_mng_admin'))]"/>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="learning,fresher,experienced"/>
+                        <button type="object" name="set_fresher" string="Recently Joined" attrs="{'invisible':
+                        [('state','in',['fresher'])]}"/>
+                        <button type="object" name="set_experienced" string="Experienced"
+                                attrs="{'invisible':[('state','in',['experienced'])]}"/>
+                        <button name="send_employee_email" type="object" string="Send Email" class="oe-highlight"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="move_designation" type="object" class="oe_stat_button" icon="fa-expand">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Designation</span>
+                                </div>
+                            </button>
+                        </div>
+                        <field name="image" widget="image" class="oe_avatar"/>
+                        <div class="or_title">
+                            <h1>
+                                <field class="o_text_overflow" name="name" default_focus="1" placeholder="Enter Full Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="emp_manager"/>
+                                <field name="dob"/>
+                                <field name="mob" widget="phone" groups="Employee_Management.group_emp_mng_admin"/>
+                                
+                                <field name="designation_id" attrs="{'invisible':[('company_id','=',False)]}"/>
+                                <field name="salary" attrs="{'invisible':[('company_id','=',False)]}"/>
+                                <field name='epf' attrs="{'invisible':[('company_id','=',False)]}"/>
+                                <field name='ctc_salary' attrs="{'invisible':[('company_id','=',False)]}"/>
+                            </group>
+                            <group>
+                                <field name="is_active" widget="boolean_toggle"/>
+                                <field name="age"/>
+                                <field name="cv"/>
+                                <field name="company_id" attrs="{'invisible':[('is_active','=',False)]}"/>
+                                <field name="experience" attrs="{'invisible':[('company_id','=',False)]}"/>
+                                <field name="company_address" attrs="{'invisible':[('company_id','=',False)]}"/>
+                            </group>
+                            <group groups="Employee_Management.group_emp_mng_admin">
+                                <field name="email"/>
+                                <field name="city"/>
+                                <field name="gender"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Note">
+                                <group>
+                                    <field name="introduction" widget='char_emojis'/>
+                                </group>
+                            </page>
+                            <page string="Other Details">
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- <record id="employee_inherit_view_tree" model="ir.ui.view">
+            <field name="name">employee.details.tree.inherit</field>
+            <field name="model">employee.details</field>
+            <field name="inherit_id" ref="Employee_Management.view_employee_details_form"/>
+            <field name="groups_id" eval="[(4, (ref('Employee_Management.group_emp_mng_manager')))]"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position='replace'>
+                    <form>
+                        <sheet>
+                            <group>
+                                <field name="name"/>
+                                <field name="mob"/>
+                                <field name="city"/>
+                            </group>
+                        </sheet>
+                    </form>
+                </xpath>
+            </field>
+        </record> -->
+
+    <record id="action_employee" model="ir.actions.act_window">
+            <field name="name">Employee Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">employee.details</field>
+            <field name="view_mode">tree,form,kanban,search</field>
+    </record>
+
+    <record id="employee_details_search" model="ir.ui.view">
+            <field name="name">employee.details.search</field>
+            <field name="model">employee.details</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="dob"/>
+                    <field name="company_address"/>
+                    <field name="designation_id"/>
+                    <field name="company_id"/>
+                    <filter string='By Fresher' name='state' domain="[('state','=','fresher')]"/>
+                    <filter string='By Experience' name='state' domain="[('state','=','experienced')]"/>
+                </search>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="employee_details_view_kanban">
+            <field name="name">employee.details.kanban</field>
+            <field name="model">employee.details</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="name"/>
+                    <field name="dob"/>
+                    <field name="mob"/>
+                    <field name="is_active"/>
+                    <field name="city"/>
+                    <field name="gender"/>
+                    <field name="designation_id"/>
+                    <field name="cv"/>
+                    <field name="introduction"/>
+                    <field name="company_id"/>
+                    <field name="image"/>
+                    <field name="id"/>
+                    <field name="state"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+								<div class="o_kanban_image">
+                                    <img class="o_kanban_image_inner_pic" alt="ghj"
+                                           t-att-src="kanban_image('employee.details',
+                                           'image',record.id.raw_value)"/>
+                                    <strong>
+                                        <field name="name"/>
+                                    </strong>
+                                </div>
+                                <div>
+                                    <ul>
+                                        <li>
+                                            <field name="dob"/>
+                                        </li>
+                                        <li>
+                                            <field name="mob"/>
+                                        </li>
+                                        <li>
+                                            <field name="designation_id"/>
+                                            <field name="company_address"/>
+                                            <field name="state"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <menuitem id="menu_employee_details"
+              name="Employee Management"
+              action="action_employee"/>
+
+</odoo>

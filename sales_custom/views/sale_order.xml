@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="sale_removes_button_form_view" model="ir.ui.view">
+        <field name="name">sale.removes.form.view</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="/form/*" position="before">
+                <header>
+                    <button type='object' name='sub_approval' string='Send for Approve' 
+                            attrs="{'invisible':[('states','in',['approved','rejected','sfa'])]}"/>
+                    <button type='object' name='set_rejection' string='Reject' 
+                            attrs="{'invisible':[('states','in',['approved','draft','rejected'])]}"
+                                                                groups='sales_custom.group_sale_mng_manager'/>
+                    <button type='object' name='set_approved' string='Approved' 
+                            attrs="{'invisible':[('states','in',['approved','draft','rejected'])]}"
+                                                            groups='sales_custom.group_sale_mng_manager'/>
+                    <field name='states' widget="statusbar" 
+                                        statusbar_visible="draft,sfa,approved,rejected"/>
+                </header>
+            </xpath>
+            <xpath expr="//field[@name='validity_date']" position="before">
+                <field name='reason' attrs="{'invisible':[('states','in',['approved','sfa','draft'])]}" class='text-danger'/>           
+            </xpath>
+        </field>
+    </record>
+</odoo>

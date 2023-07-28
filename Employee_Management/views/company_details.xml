@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="company_details_form_view" model="ir.ui.view">
+        <field name="name">company.form.view</field>
+        <field name="model">company.details</field>
+        <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="get_employee" type="object" class="oe_stat_button" icon="fa-eye">
+                                <div class="o_field_widget o_stat_info">
+                                    <span class="o_stat_text">Employee</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="no_of_employees" attrs="{'invisible':['|',('name','=',False),('location','=',False)]}"/>
+                                <button type="object" name="search_button" string="Search"/>
+                            </group>
+                            <group>
+                                <field name="location"/>
+                                <field name="type"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Employee">
+                                <field name="emp_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="mob"/>
+                                        <field name="dob"/>
+                                        <field name="designation_id"/>
+                                        <field name="gender"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Department">
+                                <field name="department_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="head_name"/>
+                                        <field name="company_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Hr Details">
+                                <field name="hr_ids">
+                                    <tree>
+                                        <field name="name"/>
+                                        <field name="address"/>
+                                        <field name="mob_no"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+        </field>
+    </record>
+
+    <record id="company_details_tree_view" model="ir.ui.view">
+            <field name="name">company.details.tree</field>
+            <field name="model">company.details</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="no_of_employees"/>
+                    <field name="emp_ids" widget="many2many_tags"/>
+                    <field name="department_ids" widget="many2many_tags"/>
+                    <field name="type"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record model='ir.ui.view' id='search_view_company_details'>
+            <field name="name">company.details.search.view</field>
+            <field name="model">company.details</field>
+            <field type="xml" name="arch">
+                <search>
+                    <field name="name"/>
+                    <field name="department_ids"/>
+                    <field name="type"/>
+                    <filter name="type" string="By Public Limited" domain="[('type','=','public limited')]"/>
+                    <filter name="type" string="By One Person Limited" domain="[('type','=','one Person limited')]"/>
+                    <group>
+                        <filter string="Type" name="group_by_name" domain="[]" context="{'group_by':'type'}"/>
+                    </group>
+                </search>
+            </field>
+            
+        </record>
+
+
+    <record model="ir.ui.view" id="company_details_view_kanban">
+            <field name="name">company.details.kanban</field>
+            <field name="model">company.details</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="name"/>
+                    <field name="location"/>
+                    <templates>
+                        <t t-name="kanban-box">
+							<div class="oe_kanban_global_click">
+								<div class="oe_kanban_details">
+									<ul>
+										<li>
+											<field name="name" string="Company"/>
+										</li>
+										<li>
+											<field name="location"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+    <record id="company_details_action" model="ir.actions.act_window">
+            <field name="name">Company Details All</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">company.details</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+    </record>
+
+    <menuitem id="menu_main_company_details"
+              name="Company Details"
+              sequence="1"
+              parent="Employee_Management.menu_employee_details"/>
+
+
+    <menuitem id="menu_company_details"
+              name="Company"
+              action="company_details_action"
+              parent="Employee_Management.menu_main_company_details"/>
+
+</odoo>

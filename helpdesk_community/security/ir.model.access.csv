@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+helpdesk_community.access_helpdesk_support_team,access_helpdesk_support_team,helpdesk_community.model_helpdesk_support_team,base.group_user,1,1,1,1
+helpdesk_community.access_helpdesk_tickets,access_helpdesk_tickets,helpdesk_community.model_helpdesk_tickets,base.group_user,1,1,1,1
+helpdesk_community.access_helpdesk_state,access_helpdesk_state,helpdesk_community.model_helpdesk_state,base.group_user,1,1,1,1
+helpdesk_community.access_helpdesk_order_repair,access_helpdesk_order_repair,helpdesk_community.model_helpdesk_order_repair,base.group_user,1,1,1,1
+helpdesk_community.access_tickets_tags,access_tickets_tags,helpdesk_community.model_tickets_tags,base.group_user,1,1,1,1
+helpdesk_community.access_calculate_line,access_calculate_line,helpdesk_community.model_calculate_line,base.group_user,1,1,1,1
+helpdesk_community.access_helpdesk_create_timesheet,access_helpdesk_create_timesheet,helpdesk_community.model_helpdesk_create_timesheet,base.group_user,1,1,1,1

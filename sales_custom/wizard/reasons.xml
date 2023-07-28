@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="reason_details_form_view">
+        <field name="name">reason.details.form</field>
+        <field name="model">reason.details</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="reason"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button type="object" name="set_reason" string="Set Reason" class="btn btn-success"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="reason_details_action">
+        <field name="name">reason details</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">reason.details</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="product_discount_set_form" model="ir.ui.view">
+        <field name="name">product.discount.form.view</field>
+        <field name="model">product.discount</field>
+        <field name="arch" type="xml">
+            <form string="Percentage setting">
+                <sheet>
+                    <group>
+                        <field name='discount'/>
+                        <field name='discount_type'/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name='set_discount' string='Set Discount' type='object'/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="product_discount_action" model="ir.actions.act_window">
+        <field name="name">Product Discount</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">product.discount</field>
+        <field name="view_mode">form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

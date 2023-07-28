@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_reason_details,reason_details,model_reason_details,,1,1,1,1
+access_sales_manager,sale_manager,model_sale_order,sales_custom.group_sale_mng_manager,1,1,1,1
+access_sales_user,sale_user,model_sale_order,sales_custom.group_sale_mng_user,1,0,0,0

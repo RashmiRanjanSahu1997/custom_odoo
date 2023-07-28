@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="print_company_details">
+        <t t-call="web.html_container">
+            <t t-call="web.external_layout">
+                <div class="page">
+    <!--                <t t-call="web.external_layout">-->
+                    <t t-foreach="docs" t-as="cd">
+                        <h1 class="text text-primary text-center">
+                            This is <span t-field="cd.name"/> Locate in <span t-field="cd.location"/>
+                            and total no of employees are <span t-field="cd.no_of_employees"/>
+                        </h1>
+                        <h3>Our all Employees are here,</h3>
+
+                        <table width="100%" style="border: 1px solid black!important"
+                               class="table table-bordered table-hover border-danger text text-center">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Designation</th>
+                                    <th>state</th>
+                                </tr>
+                            </thead>
+                            <t t-foreach="cd.emp_ids" t-as="emp">
+                            <tbody>
+                                <tr>
+                                    <td><span t-field="emp.name"/></td>
+                                    <td><span t-field="emp.designation_id"/></td>
+                                    <td><span t-field="emp.state"/></td>
+                                </tr>
+                            </tbody>
+                            </t>
+                        </table>
+                    </t>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

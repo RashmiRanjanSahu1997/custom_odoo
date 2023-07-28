@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tickets_tag_crm" model="tickets.tags">
+        <field name="name">CRM</field>
+    </record>
+
+    <record id="tickets_tag_website" model="tickets.tags">
+        <field name="name">Website</field>
+    </record>
+
+    <record id="tickets_tag_service" model="tickets.tags">
+        <field name="name">Service</field>
+    </record>
+
+    <record id="tickets_tag_repair" model="tickets.tags">
+        <field name="name">Repair</field>
+    </record>
+
+</odoo>

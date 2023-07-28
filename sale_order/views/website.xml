@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="products_website_sale_12" inherit_id="website_sale.products_item">
+        <xpath expr="//h6[hasclass('o_wsale_products_item_title')]" position="before">
+            <t t-if="product.detailed_type == 'consu'">Consumable</t>
+            <t t-elif="product.detailed_type == 'service'">Service</t>
+            <t t-else ="">Storable Product</t>
+        </xpath>
+    </template>
+</odoo>

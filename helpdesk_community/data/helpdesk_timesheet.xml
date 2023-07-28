@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="helpdesk_timesheet_a_new" model="calculate.line">
+        <field name="account_name">Fix helpdesk</field>
+        <field name="account_date" eval="(DateTime.now() + relativedelta(days=-1)).strftime('%Y-%m-%d')"/>
+<!--        <field name="account_employee_id"/>-->
+        <field name="account_unit_amount">01.00</field>
+        <field name="account_ticket_id"/>
+<!--        <field name="custom_account_id"/>-->
+    </record>
+    <record id="helpdesk_timesheet_b_new" model="calculate.line">
+        <field name="account_name">Changed helpdesk</field>
+        <field name="account_date" eval="(DateTime.now() + relativedelta(days=+1)).strftime('%Y-%m-%d')"/>
+<!--        <field name="account_employee_id" ref="hr.employee_admin"/>-->
+        <field name="account_unit_amount">0.5</field>
+        <field name="account_ticket_id"/>
+<!--        <field name="custom_account_id"/>-->
+    </record>
+</odoo>
