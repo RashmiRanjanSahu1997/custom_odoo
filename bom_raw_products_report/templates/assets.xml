@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<odoo>
-    <template id="bom_raw_products_assets_backend" name="BOM Raw Products Assets" inherit_id="web.assets_backend">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/bom_raw_products_report/static/src/js/mrp_bom_report.js"></script>
-        </xpath>
-    </template>
-</odoo>
